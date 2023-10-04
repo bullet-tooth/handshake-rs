@@ -1,0 +1,24 @@
+#!/usr/bin/env expect
+
+# Adapted from https://www.thegeekstuff.com/2010/10/expect-examples/
+# it takes a password argument
+
+set timeout 2
+
+set password [lindex $argv 0]
+
+spawn "./lncli.sh" create
+
+expect "Input wallet password:"
+send "$password\r";
+
+expect "Confirm password:"
+send "$password\r";
+
+expect "or 'n' to create a new seed (Enter y/x/n):"
+send "n\r"
+
+expect "Input your passphrase if you wish to encrypt it (or press enter to proceed without a cipher seed passphrase):"
+send "\r"
+
+interact

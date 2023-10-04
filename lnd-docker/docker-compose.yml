@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  bitcoind:
+    image: lncm/bitcoind:v22.0
+    container_name: bitcoind
+    volumes:
+      - ./data/bitcoind:/data/.bitcoin
+    ports:
+      - "18443:18443"
+      - "28332:28332"
+      - "28333:28333"
+    command: >
+      -server
+      -txindex
+      -disablewallet
+      -chain=regtest
+      -zmqpubrawblock=tcp://0.0.0.0:28332
+      -zmqpubrawtx=tcp://0.0.0.0:28333
+      -rpcallowip=0.0.0.0/0
+      -rpcbind=0.0.0.0
+      -rpcport=18443
+      -rpcuser=user
+      -rpcpassword=password
+    networks:
+      - handshake-net
+
+  lnd:
+    image: lightninglabs/lnd:v0.17.0-beta.rc6
+    container_name: lnd
+    volumes:
+      - ./data/lnd:/root/.lnd
+    ports:
+      - "9735:9735"
+    command: >
+      --listen=0.0.0.0:9735
+      --bitcoin.active
+      --bitcoin.regtest
+      --bitcoind.rpchost=bitcoind:18443
+      --bitcoind.rpcuser=user
+      --bitcoind.rpcpass=password
+      --bitcoind.zmqpubrawblock=tcp://bitcoind:28332
+      --bitcoind.zmqpubrawtx=tcp://bitcoind:28333
+      --bitcoin.node=bitcoind
+    depends_on:
+      - bitcoind
+    networks:
+      - handshake-net
+
+networks:
+  handshake-net:
+    driver: bridge
