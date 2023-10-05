@@ -3,5 +3,9 @@
 version = 3
 
 [[package]]
-name = "handshake-rs"
+name = "handhake-app"
+version = "0.1.0"
+
+[[package]]
+name = "handshake-protocol"
 version = "0.1.0"
