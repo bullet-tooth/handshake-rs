@@ -50,7 +50,9 @@ Where,
 ## Local Run with LND Node
 
 This repository contains scripts to run Lightning node locally as a docker container within "regtest" 
-bitcoin test network. It also runs `bitcoind` container that the Lightning node connects to.
+bitcoin test network. 
+Such as Lightning is a layer 2 solution it requires `bitcoind` container that the Lightning node connects to.
+Also, it requires some initial setup to make the node alive which is performed by `lnd-docker/init-lnd.sh` script (see below).  
 
 1. Open a new terminal window and run (from the repo root):
 
@@ -59,7 +61,7 @@ cd lnd-docker
 docker compose up
 ```
 
-_It will start `lnd` and `bitcoind` nodes._
+It will start `lnd` and `bitcoind` nodes.
 
 2. Open a second terminal window and run (from the repo root):
 
