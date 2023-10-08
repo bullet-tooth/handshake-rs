@@ -15,6 +15,8 @@ mod nonce;
 pub mod tag;
 pub mod util;
 
+/// Entry point for the handshake library that's perform a network connection with the provided TCP
+/// connection to the target node and outputs the protocol keys.
 pub fn handshake(
     mut stream: TcpStream,
     local_secret_key: SecretKey,

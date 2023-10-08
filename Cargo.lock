@@ -99,7 +99,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "handhake-app"
+name = "handshake-app"
 version = "0.1.0"
 dependencies = [
  "handshake-protocol",

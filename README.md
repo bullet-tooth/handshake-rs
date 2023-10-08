@@ -16,7 +16,9 @@ At the end of the successful handshake each node gets the following keys:
 There are the following packages:
 
 - [handshake-protocol](handshake-protocol) – library with the handshake protocol implementation 
-- [handhake-app](handhake-app) – command line application to run handshake
+- [handshake-app](handshake-app) – command line application to run handshake
+
+**NB:** the current implementation has significant limitation and can perform as a "initiator" only.
 
 ## Build and Run
 
@@ -39,7 +41,7 @@ cargo build
 To run the command line application run in a terminal (from the project root):
 
 ```shell
-cargo run --bin handhake-app $target_node $target_node_pk 
+cargo run --bin handshake-app $target_node $target_node_pk 
 ```
 
 Where,
@@ -85,7 +87,7 @@ Target LND node public key: 032f5cf5c8c7d13c526731c0848eaaef94fab72b11a5b785fb0f
 3. Open a third terminal window and run the handshake application specifying the provided key (from the repo root):
 
 ```shell
-cargo run --bin handhake-app localhost:9735 032f5cf5c8c7d13c526731c0848eaaef94fab72b11a5b785fb0fe8a86eed324907
+cargo run --bin handshake-app localhost:9735 032f5cf5c8c7d13c526731c0848eaaef94fab72b11a5b785fb0fe8a86eed324907
 ```
 
 At the successful handshake it should output into console the protocol keys, for example:
@@ -98,3 +100,9 @@ Also, you should see in the lightning node logs messages describing a successful
 lnd       | 2023-10-08 15:04:53.602 [INF] SRVR: New inbound connection from 192.168.65.1:50591
 lnd       | 2023-10-08 15:04:53.602 [INF] SRVR: Finalizing connection to 02c6c566039545fa9be42b01ee5d3a568dabc72211cc1248ed056a90bd3c684ab3@192.168.65.1:50591, inbound=true
 ```
+
+## TODOs
+
+- Add "receiver" support to make the protocol bi-directional
+- Improve Rust docs
+- Improve test coverage

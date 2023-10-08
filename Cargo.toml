@@ -2,5 +2,5 @@
 
 members = [
     "handshake-protocol",
-    "handhake-app",
+    "handshake-app",
 ]
