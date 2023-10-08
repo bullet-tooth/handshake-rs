@@ -31,3 +31,8 @@ cd lnd-docker
 
 _It will properly set up `lnd` node and print it's public kay to the console._
 
+
+
+"localhost:9735"
+"032f5cf5c8c7d13c526731c0848eaaef94fab72b11a5b785fb0fe8a86eed324907"
+

@@ -13,7 +13,7 @@ pub mod handshake_protocol;
 mod handshake_state;
 mod nonce;
 pub mod tag;
-mod util;
+pub mod util;
 
 pub fn handshake(
     mut stream: TcpStream,

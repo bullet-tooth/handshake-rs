@@ -7,7 +7,7 @@ use crate::error::Error::BadVersion;
 use crate::handshake_state::HandshakeState;
 use crate::nonce::Nonce;
 use crate::tag::Tag;
-use crate::util::{generate_random_keys, hash_roll, hash_roll_tag, hkdf};
+use crate::util::{generate_random_keys, hash_roll, hash_roll2, hkdf};
 use crate::Result;
 
 pub const VERSION: u8 = 0;
@@ -134,7 +134,7 @@ impl HandshakeAct2 {
             &initiator_pk.serialize(),
             &mut cipher_text,
         )?;
-        let hash = hash_roll_tag(&hash, &cipher_text, c);
+        let hash = hash_roll2(&hash, &cipher_text, c);
         let se = SharedSecret::new(&self.act.public_key(), &self.state.static_local_key);
 
         let (ck, temp_k3) = hkdf(se.as_ref(), self.state.chaining_key.as_ref());

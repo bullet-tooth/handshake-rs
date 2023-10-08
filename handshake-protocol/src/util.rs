@@ -4,7 +4,7 @@ use secp256k1::{KeyPair, Secp256k1, SecretKey};
 use sha2::digest::{FixedOutput, Output};
 use sha2::{Digest, Sha256};
 
-pub(crate) fn generate_random_keys() -> KeyPair {
+pub fn generate_random_keys() -> KeyPair {
     let secp = Secp256k1::new();
     KeyPair::new(&secp, &mut OsRng)
 }
@@ -27,13 +27,13 @@ pub(crate) fn hash_roll(hash: &Output<Sha256>, data: impl AsRef<[u8]>) -> Output
         .finalize_fixed()
 }
 
-pub(crate) fn hash_roll_tag(
+pub(crate) fn hash_roll2(
     hash: &Output<Sha256>,
     data: impl AsRef<[u8]>,
-    tag: impl AsRef<[u8]>,
+    data2: impl AsRef<[u8]>,
 ) -> Output<Sha256> {
     Sha256::new_with_prefix(hash.as_slice())
         .chain_update(data)
-        .chain_update(tag)
+        .chain_update(data2)
         .finalize_fixed()
 }
